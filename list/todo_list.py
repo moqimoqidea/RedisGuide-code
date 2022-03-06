@@ -4,6 +4,7 @@ def make_todo_list_key(user_id):
     """
     return user_id + "::todo_list"
 
+
 def make_done_list_key(user_id):
     """
     储存已完成事项的列表。
@@ -12,7 +13,6 @@ def make_done_list_key(user_id):
 
 
 class TodoList:
-
     def __init__(self, client, user_id):
         self.client = client
         self.user_id = user_id

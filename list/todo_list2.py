@@ -1,17 +1,19 @@
-#coding:utf-8
+# coding:utf-8
+
 
 def make_event_key(event_id):
     return "TodoList::event::" + str(event_id)
 
+
 def make_todolist_key(user_id):
     return "TodoList::todo_events::" + str(user_id)
+
 
 def make_donelist_key(user_id):
     return "TodoList::done_events::" + str(user_id)
 
 
 class Event:
-
     def __init__(self, client, id):
         self.client = client
         self.id = id
@@ -25,7 +27,7 @@ class Event:
             "title": title,
             "content": content,
             "category": category,
-            "due_date": due_date
+            "due_date": due_date,
         }
         return self.client.hmset(self.key, data)
 
@@ -41,7 +43,6 @@ class Event:
 
 
 class TodoList:
-
     def __init__(self, client, user_id):
         self.client = client
         # 根据用户的 ID ，创建出代办事项列表和已完成事项列表

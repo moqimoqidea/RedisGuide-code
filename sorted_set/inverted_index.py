@@ -1,13 +1,16 @@
-#coding:utf-8
+# coding:utf-8
 
 # 这个程序虽然可行，但是在每个 zset 上都为相同的物品添加相同的权重值太浪费空间了
 # 还不如添加一个额外的散列来储存权重，然后在 sinter 之后使用 SORT ... BY weight_hash 来排序
 
+
 def make_item_key(item):
     return "InvertedIndex::" + item + "::keywords"
 
+
 def make_keyword_key(keyword):
     return "InvertedIndex::" + keyword + "::items"
+
 
 def make_calculate_key(*keywords):
     # 根据输入的多个关键字
@@ -17,7 +20,6 @@ def make_calculate_key(*keywords):
 
 
 class InvertedIndex:
-
     def __init__(self, client):
         self.client = client
 

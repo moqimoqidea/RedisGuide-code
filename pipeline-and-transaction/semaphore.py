@@ -1,7 +1,7 @@
 from redis import WatchError
 
-class Semaphore:
 
+class Semaphore:
     def __init__(self, client, name):
         self.client = client
         self.name = name

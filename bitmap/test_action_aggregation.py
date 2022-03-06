@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding:utf-8
 
 import unittest
 
@@ -6,8 +6,8 @@ from redis import Redis
 from action_recorder import ActionRecorder
 from action_aggregation import ActionAggregation
 
-class TestActionAggregation(unittest.TestCase):
 
+class TestActionAggregation(unittest.TestCase):
     def setUp(self):
         self.client = Redis()
         self.client.flushdb()
@@ -33,54 +33,36 @@ class TestActionAggregation(unittest.TestCase):
 
         self.result = ActionRecorder(self.client, "two_days_online")
 
-        self.assertTrue(
-            self.result.is_performed(10086)
-        )
+        self.assertTrue(self.result.is_performed(10086))
 
-        self.assertEqual(
-            self.result.count_performed(),
-            1
-        )
+        self.assertEqual(self.result.count_performed(), 1)
 
     def test_calc_or(self):
         self.agg.calc_or("atleast_one_day_online", "day_1_online", "day_2_online")
 
         self.result = ActionRecorder(self.client, "atleast_one_day_online")
 
-        self.assertTrue(
-            self.result.is_performed(10086)
-        )
-        self.assertTrue(
-            self.result.is_performed(12345)
-        )
+        self.assertTrue(self.result.is_performed(10086))
+        self.assertTrue(self.result.is_performed(12345))
 
-        self.assertEqual(
-            self.result.count_performed(),
-            2
-        )
+        self.assertEqual(self.result.count_performed(), 2)
 
     def test_calc_xor(self):
         self.agg.calc_xor("only_one_day_online", "day_1_online", "day_2_online")
 
         self.result = ActionRecorder(self.client, "only_one_day_online")
 
-        self.assertTrue(
-            self.result.is_performed(12345)
-        )
+        self.assertTrue(self.result.is_performed(12345))
 
-        self.assertEqual(
-            self.result.count_performed(),
-            1
-        )
+        self.assertEqual(self.result.count_performed(), 1)
 
     def test_calc_not(self):
         self.agg.calc_not("not_online_in_day_2", "day_2_online")
 
         self.result = ActionRecorder(self.client, "not_online_in_day_2")
 
-        self.assertFalse(
-            self.result.is_performed(12345)
-        )
+        self.assertFalse(self.result.is_performed(12345))
+
 
 if __name__ == "__main__":
     unittest.main()

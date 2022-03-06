@@ -1,6 +1,7 @@
-#coding:utf-8
+# coding:utf-8
 
 from redis import WatchError
+
 
 def get_int_size(client, key):
     result = client.get(key)
@@ -9,8 +10,8 @@ def get_int_size(client, key):
     else:
         return int(result)
 
-class Semaphore:
 
+class Semaphore:
     def __init__(self, client, name):
         self.client = client
         self.name = name

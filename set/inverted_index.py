@@ -1,11 +1,12 @@
 def make_item_key(item):
     return "InvertedIndex::" + item + "::keywords"
 
+
 def make_keyword_key(keyword):
     return "InvertedIndex::" + keyword + "::items"
 
-class InvertedIndex:
 
+class InvertedIndex:
     def __init__(self, client):
         self.client = client
 

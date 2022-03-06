@@ -2,8 +2,8 @@ import random
 
 USER_LOCATION_KEY = "user_locations"
 
-class Location:
 
+class Location:
     def __init__(self, client):
         self.client = client
         self.key = USER_LOCATION_KEY
@@ -34,7 +34,9 @@ class Location:
         """
         以公里为单位，寻找并返回 user 指定半径范围内的所有其他用户。
         """
-        all_nearby_users = self.client.georadiusbymember(self.key, user, radius, unit="km")
+        all_nearby_users = self.client.georadiusbymember(
+            self.key, user, radius, unit="km"
+        )
         # 因为 georadiusbymember() 方法会把 user 本身也包含在结果里面，
         # 但由于我们并不需要这个用户，所以使用 remove() 方法移除他
         all_nearby_users.remove(user)

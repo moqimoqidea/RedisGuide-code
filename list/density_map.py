@@ -1,10 +1,11 @@
-#coding:utf-8
+# coding:utf-8
+
 
 def map_key(map_name, row_number):
-    return "{0}[{1}]".format(map_name, row_number) 
+    return "{0}[{1}]".format(map_name, row_number)
+
 
 class DensityMap:
-
     def __init__(self, client, map_name):
         self.client = client
         self.map_name = map_name

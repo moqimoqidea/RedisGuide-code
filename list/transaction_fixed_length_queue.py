@@ -1,7 +1,7 @@
-#coding:utf-8
+# coding:utf-8
+
 
 class FixedLengthQueue:
-
     def __init__(self, client, key, max_length):
         self.client = client
         self.key = key
@@ -10,7 +10,7 @@ class FixedLengthQueue:
     def enqueue(self, item):
         pipe = self.client.pipeline()
         pipe.rpush(self.key, item)
-        pipe.ltrim(self.key, 0, self.max_length-1)
+        pipe.ltrim(self.key, 0, self.max_length - 1)
         result = pipe.execute()
         # RPUSH 命令在推入元素之后返回列表的当前长度
         # 通过判断当前长度是否大于最大长度

@@ -1,9 +1,9 @@
-#coding:utf-8
+# coding:utf-8
 
 from redis import ResponseError
 
-class Semaphore:
 
+class Semaphore:
     def __init__(self, client, name):
         self.client = client
         self.name = name
@@ -63,12 +63,15 @@ class Semaphore:
         end
         """
         try:
-            return self.client.eval(script, 2, self.holder_key, self.size_key, identity) == 1
+            return (
+                self.client.eval(script, 2, self.holder_key, self.size_key, identity)
+                == 1
+            )
         except ResponseError as error:
             # 脚本中的 redis.error_reply() 调用将引发一个 ResponseError 异常
             # 为了与原来的信号量程序 API 保持一致，这里将 ResponseError 转换为 TypeError
             raise TypeError(error.message)
-       
+
     def release(self, identity):
         """
         根据给定的标识符，尝试释放当前客户端持有的信号量。

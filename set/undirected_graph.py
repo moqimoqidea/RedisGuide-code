@@ -1,14 +1,15 @@
-#coding:utf-8
+# coding:utf-8
+
 
 def make_vertex_key(graph_name, vertex_name):
     return graph_name + "::vertex::" + vertex_name
 
-class UndirectedGraph:
 
+class UndirectedGraph:
     def __init__(self, client, graph_name):
         self.client = client
         self.graph_name = graph_name
-        
+
     def add_edge(self, start, end):
         start_vertex_key = make_vertex_key(self.graph_name, start)
         end_vertex_key = make_vertex_key(self.graph_name, end)

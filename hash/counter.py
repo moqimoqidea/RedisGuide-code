@@ -1,5 +1,4 @@
 class Counter:
-
     def __init__(self, client, hash_key, counter_name):
         self.client = client
         self.hash_key = hash_key

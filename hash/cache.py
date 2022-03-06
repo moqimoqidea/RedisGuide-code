@@ -1,7 +1,7 @@
-#coding:utf-8
+# coding:utf-8
+
 
 class Cache:
-
     def __init__(self, client, hash):
         self.client = client
         self.hash = hash

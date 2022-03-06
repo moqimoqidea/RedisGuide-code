@@ -1,11 +1,12 @@
-#coding:utf-8
+# coding:utf-8
+
 
 def get_index(row, col):
     # 构建并返回一个 "row:col" 格式的索引，用作散列的键
     return str(row) + ":" + str(col)
 
-class SparseGraph:
 
+class SparseGraph:
     def __init__(self, client, key):
         self.client = client
         self.key = key

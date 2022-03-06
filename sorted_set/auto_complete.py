@@ -1,5 +1,4 @@
 class AutoComplete:
-
     def __init__(self, client):
         self.client = client
 
@@ -17,4 +16,4 @@ class AutoComplete:
         根据给定的前缀 prefix ，获取 count 个自动补全结果。
         """
         key = "auto_complete::" + prefix
-        return self.client.zrevrange(key, 0, count-1)
+        return self.client.zrevrange(key, 0, count - 1)

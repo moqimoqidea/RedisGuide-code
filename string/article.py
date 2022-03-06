@@ -1,7 +1,7 @@
 from time import time  # time() 函数用于获取当前 Unix 时间戳
 
-class Article:
 
+class Article:
     def __init__(self, client, article_id):
         self.client = client
         self.id = str(article_id)
@@ -19,7 +19,7 @@ class Article:
             self.title_key: title,
             self.content_key: content,
             self.author_key: author,
-            self.create_at_key: time()
+            self.create_at_key: time(),
         }
         return self.client.msetnx(article_data)
 
@@ -27,12 +27,16 @@ class Article:
         """
         返回 ID 对应的文章信息。
         """
-        result = self.client.mget(self.title_key,
-                                  self.content_key,
-                                  self.author_key,
-                                  self.create_at_key)
-        return {"id": self.id, "title": result[0], "content": result[1],
-                "author": result[2], "create_at": result[3]}
+        result = self.client.mget(
+            self.title_key, self.content_key, self.author_key, self.create_at_key
+        )
+        return {
+            "id": self.id,
+            "title": result[0],
+            "content": result[1],
+            "author": result[2],
+            "create_at": result[3],
+        }
 
     def update(self, title=None, content=None, author=None):
         """
@@ -59,5 +63,5 @@ class Article:
         返回指定长度的文章预览内容。
         """
         start_index = 0
-        end_index = preview_len-1
+        end_index = preview_len - 1
         return self.client.getrange(self.content_key, start_index, end_index)

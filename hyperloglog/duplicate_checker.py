@@ -1,5 +1,4 @@
 class DuplicateChecker:
-
     def __init__(self, client, key):
         self.client = client
         self.key = key
@@ -13,5 +12,5 @@ class DuplicateChecker:
     def unique_count(self):
         """
         返回检查器已经检查过的非重复信息数量。
-        """ 
+        """
         return self.client.pfcount(self.key)

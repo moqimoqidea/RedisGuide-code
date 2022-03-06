@@ -1,10 +1,10 @@
 from base36 import base10_to_base36
 
 ID_COUNTER = "ShortyUrl::id_counter"
-URL_HASH = "ShortyUrl::url_hash" 
+URL_HASH = "ShortyUrl::url_hash"
+
 
 class ShortyUrl:
-
     def __init__(self, client):
         self.client = client
 

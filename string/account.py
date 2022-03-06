@@ -1,9 +1,9 @@
-#coding:utf-8
+# coding:utf-8
 
 from time import time
 
-class Account:
 
+class Account:
     def __init__(self, client, account_id):
         self.client = client
         # 用户 ID
@@ -23,7 +23,7 @@ class Account:
             self.username_key: username,
             self.email_key: email,
             self.password_key: password,
-            self.created_at_key: time()
+            self.created_at_key: time(),
         }
         return self.client.msetnx(account_data)
 
@@ -31,11 +31,16 @@ class Account:
         """
         返回 ID 对应的账号信息。
         """
-        result = self.client.mget(self.username_key,
-                                  self.email_key,
-                                  self.password_key,
-                                  self.created_at_key)
-        return {"id": self.id, "username": result[0], "email": result[1], "password": result[2], "created_at": result[3]}
+        result = self.client.mget(
+            self.username_key, self.email_key, self.password_key, self.created_at_key
+        )
+        return {
+            "id": self.id,
+            "username": result[0],
+            "email": result[1],
+            "password": result[2],
+            "created_at": result[3],
+        }
 
     def update(self, email=None, password=None):
         """

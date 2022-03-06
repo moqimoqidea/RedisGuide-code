@@ -1,7 +1,7 @@
 LOG_SEPARATOR = "\n"
 
-class Log:
 
+class Log:
     def __init__(self, client, key):
         self.client = client
         self.key = key

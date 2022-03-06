@@ -1,7 +1,7 @@
 VALUE_OF_LOCK = "locking"
 
-class Lock:
 
+class Lock:
     def __init__(self, client, key):
         self.client = client
         self.key = key

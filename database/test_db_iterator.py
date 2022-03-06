@@ -1,12 +1,12 @@
-#coding:utf-8
+# coding:utf-8
 
 import unittest
 
 from redis import Redis
 from db_iterator import DbIterator
 
-class TestDbIterator(unittest.TestCase):
 
+class TestDbIterator(unittest.TestCase):
     def setUp(self):
         self.client = Redis(decode_responses=True)
         self.client.flushdb()
@@ -31,10 +31,7 @@ class TestDbIterator(unittest.TestCase):
                 break
             print("Iterator return this keys: {0}".format(result))
             result_key_set |= set(result)
-        self.assertEqual(
-            self.input_key_set,
-            result_key_set
-        )
+        self.assertEqual(self.input_key_set, result_key_set)
 
     def test_match_argument(self):
         filter_iterator = DbIterator(self.client, match="target:*")
@@ -58,10 +55,7 @@ class TestDbIterator(unittest.TestCase):
                 break
             result_key_set |= set(result)
 
-        self.assertEqual(
-            input_key_set,
-            result_key_set
-        ) 
+        self.assertEqual(input_key_set, result_key_set)
 
     def test_count_argument(self):
         # 因为 SCAN 命令的 count 参数只是返回元素数量的参数的一个期望值
@@ -74,14 +68,13 @@ class TestDbIterator(unittest.TestCase):
         small_count = big_count = 0
 
         while small_iterator.next() is not None:
-            small_count +=1
-        
+            small_count += 1
+
         while big_iterator.next() is not None:
             big_count += 1
 
-        self.assertTrue(
-            small_count >= big_count
-        )
+        self.assertTrue(small_count >= big_count)
+
 
 if __name__ == "__main__":
     unittest.main()

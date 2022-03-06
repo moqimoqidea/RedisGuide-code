@@ -1,5 +1,4 @@
 class Counter:
-
     def __init__(self, client, key):
         self.client = client
         self.key = key

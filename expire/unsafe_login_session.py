@@ -1,19 +1,21 @@
-#coding:utf-8
+# coding:utf-8
 
 from random import random
 from hashlib import sha256
 
-DEFAULT_TIMEOUT = 3600*24*30    # one month
+DEFAULT_TIMEOUT = 3600 * 24 * 30  # one month
+
 
 def create_session_key(uid):
     return "login_session::" + str(uid)
+
 
 def encrypt_alogrithm(uid):
     content = str(random()) + str(uid)
     return sha256(content).hexdigest()
 
-class LoginSession:
 
+class LoginSession:
     def __init__(self, client, uid):
         self.client = client
         self.uid = uid
@@ -27,7 +29,7 @@ class LoginSession:
         self.client.set(self.key, token)
         self.client.expire(self.key, timeout)
         return token
-        
+
     def validate(self, input_token):
         """
         验证会话令牌的正确性，

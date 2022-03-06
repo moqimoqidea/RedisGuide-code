@@ -1,4 +1,5 @@
-#coding:utf-8
+# coding:utf-8
+
 
 def mrpop(client, list_key, number):
     # 开启事务

@@ -1,17 +1,18 @@
-#coding:utf-8
+# coding:utf-8
 
 from time import time
 from timeline import Timeline
 
+
 def following_key(user):
     return user + "::following"
+
 
 def follower_key(user):
     return user + "::follower"
 
 
 class Relationship:
-
     def __init__(self, client, user):
         self.client = client
         self.user = user

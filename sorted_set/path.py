@@ -1,8 +1,8 @@
 def make_record_key(origin):
     return "forward_to_record::{0}".format(origin)
 
-class Path:
 
+class Path:
     def __init__(self, client):
         self.client = client
 
@@ -21,6 +21,8 @@ class Path:
         如果可选的 with_time 参数的值为 True ，那么将具体的访问次数也一并返回。
         """
         key = make_record_key(origin)
-        start_index = (number-1)*count
-        end_index = number*count-1
-        return self.client.zrevrange(key, start_index, end_index, withscores=with_time, score_cast_func=int) # score_cast_func = int 用于将成员的分值从浮点数转换为整数
+        start_index = (number - 1) * count
+        end_index = number * count - 1
+        return self.client.zrevrange(
+            key, start_index, end_index, withscores=with_time, score_cast_func=int
+        )  # score_cast_func = int 用于将成员的分值从浮点数转换为整数

@@ -1,7 +1,7 @@
 from time import time
 
-class Article:
 
+class Article:
     def __init__(self, client, article_id):
         self.client = client
         self.article_id = str(article_id)
@@ -20,7 +20,7 @@ class Article:
         因为文章已经存在而导致创建失败时返回 False 。
         """
         # 文章已存在，放弃执行创建操作
-        if self.is_exists(): 
+        if self.is_exists():
             return False
 
         # 把所有文章数据都放到字典里面
@@ -28,7 +28,7 @@ class Article:
             "title": title,
             "content": content,
             "author": author,
-            "create_at": time()
+            "create_at": time(),
         }
         # redis-py 的 hmset() 方法接受一个字典作为参数，
         # 并根据字典内的键和值对散列的字段和值进行设置。
@@ -50,7 +50,7 @@ class Article:
         更新成功时返回 True ，失败时返回 False 。
         """
         # 如果文章并不存在，那么放弃执行更新操作
-        if not self.is_exists(): 
+        if not self.is_exists():
             return False
 
         article_data = {}

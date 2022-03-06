@@ -1,12 +1,12 @@
-#coding:utf-8
+# coding:utf-8
 
 import unittest
 
 from redis import Redis
 from todo_list2 import Event, TodoList
 
-class TestEvent(unittest.TestCase):
 
+class TestEvent(unittest.TestCase):
     def setUp(self):
         self.client = Redis()
         self.client.flushdb()
@@ -29,15 +29,17 @@ class TestEvent(unittest.TestCase):
         self.event.set(self.title, self.content, self.category, self.due_date)
         self.assertEqual(
             self.event.get(),
-            {"id": self.event_id, 
-             "title": self.title,
-             "content": self.content,
-             "category": self.category,
-             "due_date": self.due_date}
+            {
+                "id": self.event_id,
+                "title": self.title,
+                "content": self.content,
+                "category": self.category,
+                "due_date": self.due_date,
+            },
         )
 
-class TestTodoList(unittest.TestCase):
 
+class TestTodoList(unittest.TestCase):
     def setUp(self):
         self.client = Redis()
         self.client.flushdb()
@@ -56,39 +58,28 @@ class TestTodoList(unittest.TestCase):
         )
 
     def test_show_todo_list(self):
-        self.assertEqual(
-            self.todolist.show_todo_list(),
-            []
+        self.assertEqual(self.todolist.show_todo_list(), [])
+        event_id = self.todolist.add(
+            self.title, self.content, self.category, self.due_date
         )
-        event_id = self.todolist.add(self.title, self.content, self.category, self.due_date)
-        self.assertEqual(
-            self.todolist.show_todo_list(),
-            [str(event_id)]
-        )
+        self.assertEqual(self.todolist.show_todo_list(), [str(event_id)])
 
     def test_remove(self):
-        event_id = self.todolist.add(self.title, self.content, self.category, self.due_date)
-        self.todolist.remove(event_id)
-        self.assertEqual(
-            self.todolist.show_todo_list(),
-            []
+        event_id = self.todolist.add(
+            self.title, self.content, self.category, self.due_date
         )
+        self.todolist.remove(event_id)
+        self.assertEqual(self.todolist.show_todo_list(), [])
 
     def test_show_done_list_and_done(self):
-        self.assertEqual(
-            self.todolist.show_done_list(),
-            []
+        self.assertEqual(self.todolist.show_done_list(), [])
+        event_id = self.todolist.add(
+            self.title, self.content, self.category, self.due_date
         )
-        event_id = self.todolist.add(self.title, self.content, self.category, self.due_date)
         self.todolist.done(event_id)
-        self.assertEqual(
-            self.todolist.show_done_list(),
-            [str(event_id)]
-        )
-        self.assertEqual(
-            self.todolist.show_todo_list(),
-            []
-        )
+        self.assertEqual(self.todolist.show_done_list(), [str(event_id)])
+        self.assertEqual(self.todolist.show_todo_list(), [])
+
 
 if __name__ == "__main__":
     unittest.main()

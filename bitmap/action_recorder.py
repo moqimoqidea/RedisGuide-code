@@ -1,8 +1,8 @@
 def make_action_key(action):
     return "action_recorder::" + action
 
-class ActionRecorder:
 
+class ActionRecorder:
     def __init__(self, client, action):
         self.client = client
         self.bitmap = make_action_key(action)
@@ -22,5 +22,5 @@ class ActionRecorder:
     def count_performed(self):
         """
         返回执行了指定行为的用户人数。
-        """ 
+        """
         return self.client.bitcount(self.bitmap)

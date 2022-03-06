@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding:utf-8
 
 import unittest
 
@@ -7,8 +7,8 @@ from time import sleep
 from redis import Redis
 from auto_complete import AutoComplete
 
-class TestAutoComplete(unittest.TestCase):
 
+class TestAutoComplete(unittest.TestCase):
     def setUp(self):
         self.client = Redis()
         self.client.flushdb()
@@ -22,20 +22,11 @@ class TestAutoComplete(unittest.TestCase):
         self.ac.feed("黄健翔", 70)
         self.ac.feed("黄健宏", 50)
 
-        self.assertEqual(
-            self.ac.hint("黄", 5),
-            ["黄晓明", "黄健翔", "黄健宏"]
-        )
+        self.assertEqual(self.ac.hint("黄", 5), ["黄晓明", "黄健翔", "黄健宏"])
 
-        self.assertEqual(
-            self.ac.hint("黄健", 5),
-            ["黄健翔", "黄健宏"]
-        )
+        self.assertEqual(self.ac.hint("黄健", 5), ["黄健翔", "黄健宏"])
 
-        self.assertEqual(
-            self.ac.hint("黄健", 1),
-            ["黄健翔"]
-        )
+        self.assertEqual(self.ac.hint("黄健", 1), ["黄健翔"])
 
     def test_expire_feature_works(self):
         print("创建一个只存在 {0} 秒钟的自动补全结果。".format(self.timeout))
@@ -46,11 +37,9 @@ class TestAutoComplete(unittest.TestCase):
             sleep(1)
             i -= 1
 
-        self.assertEqual(
-            self.ac.hint("Re", 10),
-            []
-        )
+        self.assertEqual(self.ac.hint("Re", 10), [])
         print("时间到，自动补全结果已自动被移除！")
+
 
 if __name__ == "__main__":
     unittest.main()

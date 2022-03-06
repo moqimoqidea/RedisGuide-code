@@ -1,5 +1,4 @@
 class DbIterator:
-
     def __init__(self, client, match=None, count=None):
         """
         创建一个新的迭代器。
@@ -22,7 +21,9 @@ class DbIterator:
         if self.iteration_is_over:
             return None
         # 获取下次迭代的游标以及当前被迭代的数据库键
-        next_cursor, keys = self.client.scan(self.current_cursor, self.match, self.count)
+        next_cursor, keys = self.client.scan(
+            self.current_cursor, self.match, self.count
+        )
         # 如果下次迭代的游标为 0 ，那么表示迭代已完成
         if next_cursor == 0:
             self.iteration_is_over = True

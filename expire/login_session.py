@@ -2,23 +2,23 @@ import random
 from hashlib import sha256
 
 # 会话的默认过期时间
-DEFAULT_TIMEOUT = 3600*24*30    # 一个月
+DEFAULT_TIMEOUT = 3600 * 24 * 30  # 一个月
 
 # 会话状态
 SESSION_NOT_LOGIN_OR_EXPIRED = "SESSION_NOT_LOGIN_OR_EXPIRED"
 SESSION_TOKEN_CORRECT = "SESSION_TOKEN_CORRECT"
 SESSION_TOKEN_INCORRECT = "SESSION_TOKEN_INCORRECT"
 
+
 def generate_token():
     """
     生成一个随机的会话令牌。
     """
-    random_string = str(random.getrandbits(256)).encode('utf-8')
+    random_string = str(random.getrandbits(256)).encode("utf-8")
     return sha256(random_string).hexdigest()
 
 
 class LoginSession:
-
     def __init__(self, client, user_id):
         self.client = client
         self.user_id = user_id

@@ -1,9 +1,9 @@
-#coding:utf-8
+# coding:utf-8
 
 from redis import WatchError
 
-class Lock:
 
+class Lock:
     def __init__(self, client, key):
         self.client = client
         self.key = key

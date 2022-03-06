@@ -1,5 +1,4 @@
 class Boardcast:
-
     def __init__(self, client, topic):
         self.client = client
         self.topic = topic
@@ -21,14 +20,14 @@ class Boardcast:
         """
         result = self.pubsub.get_message(timeout=timeout)
         if result is not None:
-            return result["data"] # 只返回消息正文
+            return result["data"]  # 只返回消息正文
 
     def status(self):
         """
         查看主题当前的订阅量。
         """
         result = self.client.pubsub_numsub(self.topic)
-        return result[0][1] # 只返回订阅量，丢弃频道的名字
+        return result[0][1]  # 只返回订阅量，丢弃频道的名字
 
     def close(self):
         """

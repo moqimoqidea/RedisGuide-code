@@ -3,7 +3,7 @@ from time import time  # 获取浮点数格式的 unix 时间戳
 from hashlib import sha256
 
 # 会话的默认过期时间
-DEFAULT_TIMEOUT = 3600*24*30    # 一个月
+DEFAULT_TIMEOUT = 3600 * 24 * 30  # 一个月
 
 # 储存会话令牌以及会话过期时间戳的散列
 SESSION_TOKEN_HASH = "session::token"
@@ -15,16 +15,16 @@ SESSION_EXPIRED = "SESSION_EXPIRED"
 SESSION_TOKEN_CORRECT = "SESSION_TOKEN_CORRECT"
 SESSION_TOKEN_INCORRECT = "SESSION_TOKEN_INCORRECT"
 
+
 def generate_token():
     """
     生成一个随机的会话令牌。
     """
-    random_string = str(random.getrandbits(256)).encode('utf-8')
+    random_string = str(random.getrandbits(256)).encode("utf-8")
     return sha256(random_string).hexdigest()
 
 
 class LoginSession:
-
     def __init__(self, client, user_id):
         self.client = client
         self.user_id = user_id
@@ -37,7 +37,7 @@ class LoginSession:
         # 生成会话令牌
         user_token = generate_token()
         # 计算会话到期时间戳
-        expire_timestamp = time()+timeout
+        expire_timestamp = time() + timeout
         # 以用户 ID 为字段，将令牌和到期时间戳分别储存到两个散列里面
         self.client.hset(SESSION_TOKEN_HASH, self.user_id, user_token)
         self.client.hset(SESSION_EXPIRE_TS_HASH, self.user_id, expire_timestamp)

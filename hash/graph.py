@@ -5,6 +5,7 @@ def make_edge_name_from_vertexs(start, end):
     """
     return str(start) + "->" + str(end)
 
+
 def decompose_vertexs_from_edge_name(name):
     """
     从边的名字中分解出边的起点和终点。
@@ -14,7 +15,6 @@ def decompose_vertexs_from_edge_name(name):
 
 
 class Graph:
-
     def __init__(self, client, key):
         self.client = client
         self.key = key

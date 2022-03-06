@@ -1,11 +1,11 @@
-#coding:utf-8
+# coding:utf-8
+
 
 class Limiter:
-
     def __init__(self, client, limiter_name):
         self.client = client
-        self.max_execute_times_key = limiter_name + '::max_execute_times'
-        self.current_execute_times_key = limiter_name + '::current_execute_times'
+        self.max_execute_times_key = limiter_name + "::max_execute_times"
+        self.current_execute_times_key = limiter_name + "::current_execute_times"
 
     def set_max_execute_times(self, n):
         """
@@ -31,7 +31,7 @@ class Limiter:
         if current_execute_times > max_execute_times:
             # 当用户尝试执行操作的次数超过最大可执行次数时
             # current_execute_times 的值就会比 max_execute_times 的值更大
-            # 为了将已执行次数的值保持在 
+            # 为了将已执行次数的值保持在
             # 0 <= current_execute_times <= max_execute_times 这一区间
             # 如果已执行次数已经超过最大可执行次数
             # 那么程序将返回最大可执行次数作为结果
@@ -47,7 +47,7 @@ class Limiter:
         """
         updated_current_execute_times = self.client.incr(self.current_execute_times_key)
         max_execute_times = self.get_max_execute_times()
-        return (updated_current_execute_times <= max_execute_times)
+        return updated_current_execute_times <= max_execute_times
 
     def remaining_execute_times(self):
         """

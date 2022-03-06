@@ -1,5 +1,6 @@
 from message_queue import reconstruct_message_list, get_message_from_nested_list
 
+
 class Group:
     """
     为消息队列提供消费者组功能。
@@ -46,7 +47,7 @@ class Group:
         # 因为一个流可以拥有多个消费者组
         # 所以我们需要从命令返回的多个组信息中找到正确的信息
         for group_info in self.client.xinfo_groups(self.stream):
-            if group_info['name'] == self.group:
+            if group_info["name"] == self.group:
                 return group_info
         else:
             return dict()

@@ -1,5 +1,4 @@
 class MessageQueue:
-
     def __init__(self, client, queue_name):
         self.client = client
         self.queue_name = queue_name

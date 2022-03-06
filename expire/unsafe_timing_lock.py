@@ -1,9 +1,9 @@
-#coding:utf-8
+# coding:utf-8
 
 VALUE_OF_LOCK = "this-key-is-an-acquired-lock"
 
-class TimingLock:
 
+class TimingLock:
     def __init__(self, client, key):
         self.client = client
         self.key = key

@@ -1,8 +1,8 @@
 def following_key(user):
     return user + "::following"
 
-class CommonFollowing:
 
+class CommonFollowing:
     def __init__(self, client):
         self.client = client
 
@@ -22,4 +22,6 @@ class CommonFollowing:
         """
         user_following_set = following_key(user)
         target_following_set = following_key(target)
-        return self.client.sinterstore(store_key, user_following_set, target_following_set)
+        return self.client.sinterstore(
+            store_key, user_following_set, target_following_set
+        )

@@ -1,7 +1,7 @@
-#coding:utf-8
+# coding:utf-8
+
 
 class Lottery:
-
     def __init__(self, client, key):
         self.client = client
         self.key = key

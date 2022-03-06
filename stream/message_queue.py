@@ -11,6 +11,7 @@ def reconstruct_message_list(message_list):
         result.append({id: kvs})
     return result
 
+
 def get_message_from_nested_list(lst):
     """
     从嵌套列表中取出消息本体。

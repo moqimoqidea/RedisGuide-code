@@ -1,14 +1,14 @@
-#coding:utf-8
+# coding:utf-8
 
 from cache import Cache
 from base36 import base10_to_base36
 
 ID_COUNTER = "ShortyUrl::id_counter"
-URL_HASH = "ShortyUrl::url_hash" 
+URL_HASH = "ShortyUrl::url_hash"
 URL_CACHE = "ShortyUrl::url_cache"
 
-class ShortyUrl:
 
+class ShortyUrl:
     def __init__(self, client):
         self.client = client
         self.cache = Cache(self.client, URL_CACHE)  # 创建缓存对象

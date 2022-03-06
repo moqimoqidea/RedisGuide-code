@@ -1,9 +1,9 @@
 def type_sample_result(type_name, type_counter, db_size):
     result = "{0}: {1} keys, {2}% of the total."
-    return result.format(type_name, type_counter, type_counter*100.0/db_size)
+    return result.format(type_name, type_counter, type_counter * 100.0 / db_size)
+
 
 class DbSampler:
-
     def __init__(self, client):
         self.client = client
 

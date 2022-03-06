@@ -1,5 +1,4 @@
 class Limiter:
-
     def __init__(self, client, key):
         self.client = client
         self.key = key
@@ -16,7 +15,7 @@ class Limiter:
         是的话返回 True ，否则返回 False 。
         """
         num = self.client.decr(self.key)
-        return (num >= 0)
+        return num >= 0
 
     def remaining_execute_times(self):
         """

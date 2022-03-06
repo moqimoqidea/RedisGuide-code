@@ -1,17 +1,19 @@
-#coding:utf-8
+# coding:utf-8
+
 
 def make_matrix_key(matrix_name):
     return "matrix::" + matrix_name
+
 
 def calculate_index(row, col, row_num, col_num):
     if not (row < row_num):
         raise ValueError("row out of range")
     if not (col < col_num):
         raise ValueError("col out of range")
-    return "#" + str(row*row_num+col)
+    return "#" + str(row * row_num + col)
+
 
 class IntegerMatrix:
-
     def __init__(self, client, name, row_num, col_num, bit_length=64, signed=True):
         self.client = client
         self.bitmap = make_matrix_key(name)

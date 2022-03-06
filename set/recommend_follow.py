@@ -1,11 +1,12 @@
 def following_key(user):
     return user + "::following"
 
+
 def recommend_follow_key(user):
     return user + "::recommend_follow"
 
-class RecommendFollow:
 
+class RecommendFollow:
     def __init__(self, client, user):
         self.client = client
         self.user = user

@@ -3,9 +3,11 @@ import random
 from redis import Redis
 from hashlib import sha256
 
+
 def generate_new_password():
-    random_string = str(random.getrandbits(256)).encode('utf-8')
+    random_string = str(random.getrandbits(256)).encode("utf-8")
     return sha256(random_string).hexdigest()
+
 
 def reset_user_password(origin, new):
     # 两个客户端，分别连接两个数据库

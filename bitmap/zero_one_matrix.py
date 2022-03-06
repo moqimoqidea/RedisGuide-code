@@ -1,15 +1,16 @@
 def make_matrix_key(matrix_name):
     return "matrix::" + matrix_name
 
+
 def calculate_index(row, col, row_num, col_num):
     if not (row < row_num):
         raise ValueError("row out of range")
     if not (col < col_num):
         raise ValueError("col out of range")
-    return row*col_num+col
+    return row * col_num + col
+
 
 class ZeroOneMatrix:
-
     def __init__(self, client, name, row_num, col_num):
         self.client = client
         self.bitmap = make_matrix_key(name)

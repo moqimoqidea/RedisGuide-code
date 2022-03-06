@@ -1,8 +1,8 @@
 def make_tag_key(item):
     return item + "::tags"
 
-class Tagging:
 
+class Tagging:
     def __init__(self, client, item):
         self.client = client
         self.key = make_tag_key(item)

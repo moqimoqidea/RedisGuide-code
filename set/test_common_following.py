@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding:utf-8
 
 import unittest
 
@@ -6,8 +6,8 @@ from redis import Redis
 from relationship import Relationship
 from common_following import CommonFollowing
 
-class TestCommonFollow(unittest.TestCase):
 
+class TestCommonFollow(unittest.TestCase):
     def setUp(self):
         self.client = Redis(decode_responses=True)
         self.client.flushdb()
@@ -27,34 +27,29 @@ class TestCommonFollow(unittest.TestCase):
         self.jack.follow("john")
 
     def test_calculate(self):
-        self.assertEqual(
-            self.common_following.calculate("peter", "jack"),
-            set()
-        )
+        self.assertEqual(self.common_following.calculate("peter", "jack"), set())
 
         self.follow_users()
-        
+
         self.assertEqual(
-            self.common_following.calculate("peter", "jack"),
-            {"tom", "mary"}
+            self.common_following.calculate("peter", "jack"), {"tom", "mary"}
         )
 
     def test_calculate_and_store(self):
-        self.assertEqual(
-            self.client.smembers("peter-and-jack-common-follow"),
-            set()
-        )
+        self.assertEqual(self.client.smembers("peter-and-jack-common-follow"), set())
 
         self.follow_users()
 
         self.assertEqual(
-            self.common_following.calculate_and_store("peter", "jack", "peter-and-jack-common-follow"),
-            2
+            self.common_following.calculate_and_store(
+                "peter", "jack", "peter-and-jack-common-follow"
+            ),
+            2,
         )
         self.assertEqual(
-            self.client.smembers("peter-and-jack-common-follow"),
-            {"tom", "mary"}
+            self.client.smembers("peter-and-jack-common-follow"), {"tom", "mary"}
         )
+
 
 if __name__ == "__main__":
     unittest.main()

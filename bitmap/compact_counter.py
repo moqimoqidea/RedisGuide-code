@@ -1,8 +1,8 @@
 def get_bitmap_index(index):
-    return "#"+str(index)
+    return "#" + str(index)
+
 
 class CompactCounter:
-
     def __init__(self, client, key, bit_length, signed=True):
         """
         初始化紧凑计数器，
@@ -23,7 +23,16 @@ class CompactCounter:
         对索引 index 上的计数器执行加法操作，然后返回计数器的当前值。
         """
         bitmap_index = get_bitmap_index(index)
-        result = self.client.execute_command("BITFIELD", self.key, "OVERFLOW", "SAT", "INCRBY", self.type, bitmap_index, n)
+        result = self.client.execute_command(
+            "BITFIELD",
+            self.key,
+            "OVERFLOW",
+            "SAT",
+            "INCRBY",
+            self.type,
+            bitmap_index,
+            n,
+        )
         return result[0]
 
     def decrease(self, index, n=1):
@@ -32,7 +41,16 @@ class CompactCounter:
         """
         bitmap_index = get_bitmap_index(index)
         decrement = -n
-        result = self.client.execute_command("BITFIELD", self.key, "OVERFLOW", "SAT", "INCRBY", self.type, bitmap_index, decrement)
+        result = self.client.execute_command(
+            "BITFIELD",
+            self.key,
+            "OVERFLOW",
+            "SAT",
+            "INCRBY",
+            self.type,
+            bitmap_index,
+            decrement,
+        )
         return result[0]
 
     def get(self, index):
@@ -40,5 +58,7 @@ class CompactCounter:
         获取索引 index 上的计数器的当前值。
         """
         bitmap_index = get_bitmap_index(index)
-        result = self.client.execute_command("BITFIELD", self.key, "GET", self.type, bitmap_index)
+        result = self.client.execute_command(
+            "BITFIELD", self.key, "GET", self.type, bitmap_index
+        )
         return result[0]
